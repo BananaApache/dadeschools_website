@@ -1,6 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
+
+
+
+def home(request):
+    return render(request, "home.html")
+
+
+def send_to_home(request):
+    return redirect(home)
 
 
 def login(request):
@@ -21,4 +30,8 @@ def grades(request):
 
 def nogrades(request):
     return render(request, "nogrades.html")
+
+
+def node_package(request):
+    return render(request, "node_package.html")
 
