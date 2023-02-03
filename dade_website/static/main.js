@@ -5,6 +5,7 @@ const urlQueries = window.location.search;
 const queries = new URLSearchParams(urlQueries);
 const IDNum = queries.get('id')
 
+
 fetch(`https://dade-server.vercel.app/?id=${IDNum}`, { method: "GET" })
 .then(res => res.text())
 .then(data => {
@@ -36,31 +37,11 @@ fetch(`https://dade-server.vercel.app/?id=${IDNum}`, { method: "GET" })
     document.body.appendChild(root)
 
     root.append(html)
-
-    // fs.writeFile("output.html", html, (e) => {
-    //     if (e) {
-    //         return console.log(e)
-    //     }
-    //     else {
-    //         var doc = new jsdom.JSDOM(html, "text/xml")
-
-    //         var name = doc.window.document.querySelector("strong").textContent
-
-    //         params = {
-    //             host: "127.0.0.1",
-    //             port: 8080,
-    //             open: false
-    //         }
-            
-    //         liveServer.start(params);
-            
-    //         open(`http://127.0.0.1:8080/login.html?name=${name}&id=${IDNum}`)
-            
-    //         console.log("Output saved to html file")
-    //     }
-    // })
 })
-
+.catch( e => {
+    console.log("ERROR")
+    console.log(e)
+})
 
 
 function getCourseURL(d) {
@@ -79,6 +60,7 @@ function getCourseURL(d) {
     }
 }
 
+
 function changeGrade(d) {
     const gradeObject = {}
     const row = d.parentElement.parentElement
@@ -92,30 +74,36 @@ function changeGrade(d) {
     let lettersWithSpace = divs.map(div => Array.prototype.slice.call(Array.prototype.slice.call(div[0].children)[0].children)[0].textContent)
     let letters = lettersWithSpace.map(letter => letter.replaceAll("\t", "").replaceAll("\n", ""))
 
-    let i = 1;
+    if ( row.childNodes.length == 7 ) {
+        let i = 1;
 
-    var changingRow = document.createElement("div")
-    changingRow.setAttribute("class", "changingRow")
-    row.append(changingRow)
+        var changingRow = document.createElement("div")
+        changingRow.setAttribute("class", "changingRow")
+        row.append(changingRow)
 
-    letters.reverse().forEach(letter => {
-        var input = document.createElement("input")
-        input.setAttribute("class", `inputBox`)
-        input.setAttribute("maxlength", "5")
-        input.setAttribute("value", `${letter}`)
-        changingRow.append(input)
-
-        i += 1
-    })
-
-    var button = document.createElement("button")
-    button.setAttribute("id", "changeGrade")
-    button.setAttribute("type", "button")
-    button.setAttribute("onclick", "submitGrade(this)")
-    button.innerHTML = "Submit"
-    changingRow.append(button)
+        letters.reverse().forEach(letter => {
+            var input = document.createElement("input")
+            input.setAttribute("class", `inputBox`)
+            input.setAttribute("maxlength", "5")
+            input.setAttribute("value", `${letter}`)
+            changingRow.append(input)
+    
+            i += 1
+        })
+    
+        var button = document.createElement("button")
+        button.setAttribute("id", "changeGrade")
+        button.setAttribute("type", "button")
+        button.setAttribute("onclick", "submitGrade(this)")
+        button.innerHTML = "Submit"
+        changingRow.append(button)
+    }
+    else {
+        row.removeChild(row.children[3])
+    }
 
 }
+
 
 function submitGrade(d) {
     const row = d.parentElement.parentElement
@@ -205,8 +193,11 @@ function submitGrade(d) {
         i += 1;
     })
 
-    getElementByXpath(getPathTo(d.parentElement)).style.display = "none"
+    console.log("Removing Row")
+
+    row.removeChild(row.children[3])
 }
+
 
 function getPathTo(element) {
     if (element.id !== '')
