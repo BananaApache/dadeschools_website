@@ -3,7 +3,6 @@ from django.shortcuts import render, redirect
 # Create your views here.
 
 
-
 def home(request):
     return render(request, "home.html")
 
@@ -35,3 +34,6 @@ def nogrades(request):
 def node_package(request):
     return render(request, "node_package.html")
 
+
+def error(request):
+    return render(request, "error.html")

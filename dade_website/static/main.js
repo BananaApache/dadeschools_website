@@ -36,6 +36,10 @@ fetch(`https://dade-server.vercel.app/?id=${IDNum}`, { method: "GET" })
     root.setAttribute("id", "root")
     document.body.appendChild(root)
 
+    if (html == null) {
+        window.location = "/error"
+    }
+
     root.append(html)
 })
 .catch( e => {

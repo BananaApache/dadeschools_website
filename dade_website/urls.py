@@ -10,5 +10,6 @@ urlpatterns = [
     path('grades/', views.grades),
     path('nogrades/', views.nogrades),
     path('coursegrades/', views.coursegrades),
-    path('node_package/', views.node_package)
+    path('node_package/', views.node_package),
+    path('error/', views.error)
 ]
