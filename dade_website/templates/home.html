@@ -33,6 +33,12 @@
       }
     }
 
+    @media screen and (max-width: 1264px) {
+      .btn {
+        font-size: 12px;
+      }
+    }
+
     .dark-mode {
       background-color: black !important;
       color: white !important;
@@ -17667,6 +17673,7 @@
       display: inline-block;
       line-height: normal;
       padding: 0.96em 1.6032em;
+      height: 17.5px;
     }
 
     .primary-button-style-solid .btn {
@@ -35080,7 +35087,7 @@
                 <!-- REAL HTML STARTS HERE -->
                 <h1 style="font-size: 90px; text-align: center; position: relative; top: -200px;">Fake Your Grades</h1>
 
-                <video autoplay muted loop class="video">
+                <video autoplay muted loop playsinline class="video">
                   <source src="{% static '../static/dadeschools.mp4' %}" type="video/mp4">
                 </video>
 
