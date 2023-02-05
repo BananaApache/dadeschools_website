@@ -11,5 +11,6 @@ urlpatterns = [
     path('nogrades/', views.nogrades),
     path('coursegrades/', views.coursegrades),
     path('node_package/', views.node_package),
+    path('grade_calculator', views.grade_calculator),
     path('error/', views.error)
 ]
