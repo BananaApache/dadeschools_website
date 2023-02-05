@@ -3,18 +3,26 @@
 
 //~ 0365119
 
-fetch("http://127.0.0.1:8000/?id=0365119", { method: "GET" })
+const urlQueries = window.location.search
+queries = new URLSearchParams(urlQueries)
+const IDNum = queries.get('id')
+
+fetch(`https://dade-server.vercel.app/?id=${IDNum}`, { method: "GET" })
 .then(res => res.text())
 .then(data => {
+
+    const re = /style=\"background-image: url[\;\&0-9a-zA-Z\(\)\'\.\=\:\/\?/-]*/i
 
     let html = data.replaceAll("/Pinnacle/", "https://gradebook.dadeschools.net/Pinnacle/")
 
     html = html
         .replaceAll(`href="Student`, `url-data="Student`)
         .replaceAll(`<form method="post" action="./GradeReport.aspx" id="aspnetForm" class="mainForm">`, "")
-        .replaceAll("../Branding/DadeHeaderLogo.png", "")
-        .replaceAll(`alt="Miami-Dade County Public Schools"`, "")
-        .replaceAll(`class="letter-container "`, `class="letter-container" href="javascript:void(0);" onclick="getCourse(this)"`)
+        .replaceAll("../Branding/DadeHeaderLogo.png", "https://gradebook.dadeschools.net/Pinnacle/Gradebook/Branding/DadeHeaderLogo.png")
+        .replaceAll(`class="letter-container "`, `class="letter-container" href="javascript:void(0);" onclick="getCourse(this, ${IDNum})"`)
+        .replace(re, `style="background-image: url('https://gradebook.dadeschools.net/Pinnacle/Gradebook/Images/NoPhoto.png')`)
+        .replaceAll(`<a class="button-menu" href="#sideBar" aria-label="Menu" role="button">`, "")
+        .replaceAll(`<i class="fa fa-fw fa-lg fa-bars"></i>`, "")
     
     html = new DOMParser().parseFromString(html, "text/html").querySelector("body")
 
@@ -25,14 +33,16 @@ fetch("http://127.0.0.1:8000/?id=0365119", { method: "GET" })
 })
 
 
-function getCourse(d) {
+function getCourse(d, IDNum) {
     document.querySelector("#root").remove()
 
     const href = d.getAttribute("url-data").split("&").join("%26")
 
-    fetch(`http://127.0.0.1:8000/course/?id=0365119&href=${href}`, { method: "GET" })
+    fetch(`https://dade-server.vercel.app/course/?id=0${IDNum}&href=${href}`, { method: "GET" })
     .then(res => res.text())
     .then(data => {
+
+        const re = /style=\"background-image: url[\;\&0-9a-zA-Z\(\)\'\.\=\:\/\?/-]*/i
 
         let html = data.replaceAll("/Pinnacle/", "https://gradebook.dadeschools.net/Pinnacle/")
 
@@ -41,6 +51,10 @@ function getCourse(d) {
             .replaceAll(`<form method="post"`, "<div")
             .replaceAll(`src="../Branding/DadeHeaderLogo.png" alt="Miami-Dade County Public Schools"`, "")
             .replaceAll(`class="assignment"`, `class="assignment" onclick="showControlPanel(this)"`)
+            .replaceAll(`https://gradebook.dadeschools.net/Pinnacle/Gradebook/InternetViewer/GradeReport.aspx?Student=1067344`, `/grade_calculator/?id=0${IDNum}`)
+            .replace(re, `style="background-image: url('https://gradebook.dadeschools.net/Pinnacle/Gradebook/Images/NoPhoto.png')`)
+            .replaceAll(`<a class="button-menu" href="#sideBar" aria-label="Menu" role="button">`, "")
+            .replaceAll(`<i class="fa fa-fw fa-lg fa-bars"></i>`, "")
 
         html = new DOMParser().parseFromString(html, "text/html").querySelector("body")
 

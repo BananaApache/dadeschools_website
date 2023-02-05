@@ -7,7 +7,7 @@ def home(request):
     return render(request, "home.html")
 
 
-def send_to_home():
+def send_to_home(request):
     return redirect(home)
 
 
@@ -34,6 +34,9 @@ def nogrades(request):
 def node_package(request):
     return render(request, "node_package.html")
 
+
+def get_id_number(request):
+    return render(request, "get_id_number.html")
 
 
 def grade_calculator(request):

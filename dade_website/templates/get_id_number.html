@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style type="text/css">
+        * {
+            font-family:'Courier New', Courier, monospace;
+        }
+
+        h1 {
+			font-size: 60px;
+			font-weight: 500;
+			height: 110px;
+			margin: 200px auto 0px auto;
+			display: block;
+			text-align: center;
+		}
+
+		#inputBox {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			flex-wrap: wrap;
+			margin: 10px auto;
+			width: 500px;
+		}
+
+		#inputBox input {
+			border-radius: 10px !important;
+			outline: none;
+			border: 2px solid black !important;
+			height: 45px;
+			padding: 5px !important;
+			background-color: #9be1d8 !important;
+			margin: 5px !important;
+			font-weight: 500;
+            font-size: 25px;
+		}
+		
+		#inputBox button {
+			border-radius: 10px !important;
+			outline: none;
+			border: 2px solid black !important;
+			height: 45px;
+			padding: 5px !important;
+			background-color: #61ec88 !important;
+			margin: 30px auto !important;
+            font-size: 20px;
+			font-weight: 500;
+			width: 90px;
+			display: block;
+		}
+
+		#inputBox button:hover {
+			background-color: #74e394 !important;
+		}
+	</style>
+
+    <title>Grade Calculator</title>
+</head>
+<body>
+
+    <h1>Grade Calculator</h1>
+
+	<div id="inputBox">
+		<input type="text" placeholder="Enter your ID number..." spellcheck="false" id="input">
+		<button type="submit" onclick="submit()">Submit</button>
+	</div>
+    
+    <script>
+        document.querySelector("#input").addEventListener("keypress", e => {
+            if (e.keyCode === 13) {
+                submit()
+            }
+        })
+
+        function submit() {
+            const IDNum = document.querySelector("#input").value
+            window.location = `/grade_calculator?id=${IDNum}`
+        }
+    </script>
+
+</body>
+</html>
