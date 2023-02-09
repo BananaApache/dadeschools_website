@@ -33,9 +33,52 @@
       }
     }
 
-    @media screen and (max-width: 1264px) {
+    @media screen and (max-width: 1440px) {
       .btn {
         font-size: 10px;
+        height: 12.5px !important;
+      }
+
+      #my_logo {
+        display: none;
+      }
+    }
+
+    @media screen and (max-width: 697px) {
+      h1 {
+        font-size: 50px !important;
+        top: -86px !important;
+      }
+
+      h2 {
+        font-size: 40px !important;
+      }
+
+      h3 {
+        font-size: 20px !important;
+        margin-left: 10px !important; 
+      }
+
+      p {
+        margin-left: 10px !important;
+      }
+
+      .header-mobile {
+        height: 85px !important;
+      }
+
+      img {
+        width: 300px;
+        margin-left: 20px !important;
+      }
+
+      #my_logo_mobile {
+        width: 45px !important;
+        margin: 0 0 10px 0 !important;
+      }
+
+      #contact * {
+        display: none;
       }
     }
 
@@ -64,14 +107,14 @@
     }
 
     h2 {
-      font-size: 70px !important;
+      font-size: 70px;
       text-align: center;
       margin-top: 50px;
     }
 
     h3 {
-      font-size: 30px !important;
-      margin: 60px 0 30px 70px !important;
+      font-size: 30px;
+      margin: 60px 0 30px 70px;
     }
 
     h4 {
@@ -84,7 +127,7 @@
 
     p {
       font-weight: 100 !important;
-      margin-left: 70px !important;
+      margin-left: 70px;
     }
 
     .certified-tag {
@@ -255,6 +298,7 @@
 
     body {
       margin: 0;
+      overflow-x: hidden;
     }
 
     a {
@@ -9267,7 +9311,6 @@
       letter-spacing: 0em;
       text-transform: none;
       line-height: 1.3em;
-      font-size: 2rem;
     }
 
     
@@ -9525,27 +9568,6 @@
       [data-test="member-access-page-root"] .sqs-editable-button.join-button {
         font-size: calc((1 - 1) * 1.2vw + 1rem);
       }
-    }
-
-    .tmp screen and (min-width: 5120px) {
-
-      .sqs-block-member-area .sqs-editable-button.join-button,
-      [data-test="member-access-page-root"] .sqs-editable-button.join-button {
-        font-size: calc(1 * 1rem);
-      }
-    }
-
-    h1,
-    h2,
-    h3,
-    h4 {
-      margin: 2rem 0;
-    }
-
-    .sqsrte-large,
-    p,
-    .sqsrte-small {
-      margin: 1rem 0;
     }
 
     .announcement-bar-font {
@@ -34216,7 +34238,7 @@
     <!-- LOGO -->
     <div class="header-nav-item header-nav-item--collection" style="cursor: pointer; position: absolute; margin: 20px;">
       <a href="/home">
-        <img src="{% static '../static/my_logo.png' %}" width="50">
+        <img src="{% static '../static/my_logo.png' %}" id="my_logo" width="50">
       </a>
     </div>
 
@@ -34306,7 +34328,7 @@
 
     <div class="header-nav-item header-nav-item--collection" style="cursor: pointer; margin: 20px;">
       <a href="/home">
-        <img src="{% static '../static/my_logo.png' %}" width="50">
+        <img src="{% static '../static/my_logo.png' %}" id="my_logo_mobile" width="50">
       </a>
     </div>
 
